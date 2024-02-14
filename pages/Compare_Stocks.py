@@ -30,8 +30,8 @@ for year in range(start_year - interval, end_year + 1):        # start_year - in
 
     df.loc[len(df)] = [year, first_day_closing_price1, first_day_closing_price2]
 
-df['% Change from ' + str(interval) + ' Years Ago (' + ticker1 + ')'] = df.iloc[:, 1].pct_change(periods=interval) * 100    # adds percent change column to df
-df['% Change from ' + str(interval) + ' Years Ago (' + ticker2 + ')'] = df.iloc[:, 2].pct_change(periods=interval) * 100    
+df['% Change from ' + str(interval) + ' Years Earlier (' + ticker1 + ')'] = df.iloc[:, 1].pct_change(periods=interval) * 100    # adds percent change column to df
+df['% Change from ' + str(interval) + ' Years Earlier (' + ticker2 + ')'] = df.iloc[:, 2].pct_change(periods=interval) * 100    
 df = df.drop(index=df.index[:interval]).reset_index(drop=True)         # removes the unecessary years for visualization
 highPrice1 = round(df.iloc[:, 1].max(), 2)    # calls 2nd column
 lowPrice1 = round(df.iloc[:, 1].min(), 2)  

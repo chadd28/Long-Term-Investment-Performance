@@ -41,7 +41,7 @@ for year in range(start_year - interval, end_year + 1):        # start_year - in
 
     df.loc[len(df)] = [year, first_day_closing_price]
 
-df['Percent Change From ' + str(interval) + ' Years Ago'] = df['Adj Close'].pct_change(periods=interval) * 100    # adds percent change column to df
+df['Change in stock price compared with ' + str(interval) + ' Years Earlier'] = df['Adj Close'].pct_change(periods=interval) * 100    # adds percent change column to df
 df = df.drop(index=df.index[:interval]).reset_index(drop=True)         # removes the unecessary years for visualization
 highPrice = round(df.iloc[:, 1].max(), 2)    # calls 2nd column
 lowPrice = round(df.iloc[:, 1].min(), 2)  
@@ -54,7 +54,7 @@ df['Year'] = df['Year'].astype(int)
 df['Year'] = df['Year'].astype(str).str.replace(',', '')
 
 # # graph of percent change from x years ago of closing price on first day of that year
-fig1 = px.bar(df, x='Year', y =df.columns[2], title="Percent Change of Last " + str(interval) + " Years of Closing Price of " + ticker + " on First Day of Each Year")
+fig1 = px.bar(df, x='Year', y =df.columns[2], title="Change in Stock Price of " + ticker + " on First Day of Each Year Compared with " + str(interval) + " Years Earlier")
 fig1.update_traces(marker=dict(color=['red' if val < 0 else 'green' for val in df.iloc[:, 2]]))
 st.plotly_chart(fig1)
 
